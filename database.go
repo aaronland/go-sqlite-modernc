@@ -8,6 +8,7 @@ import (
 	_ "modernc.org/sqlite"
 	"net/url"
 	"sync"
+	"log"
 )
 
 const SQLITE_SCHEME string = "modernc"
@@ -18,6 +19,7 @@ type ModerncDatabase struct {
 	conn *sql.DB
 	dsn  string
 	mu   *sync.Mutex
+	logger *log.Logger
 }
 
 func init() {
@@ -57,10 +59,13 @@ func NewModerncDatabase(ctx context.Context, db_uri string) (sqlite.Database, er
 
 	mu := new(sync.Mutex)
 
+	logger := log.Default()
+	
 	db := ModerncDatabase{
 		conn: conn,
 		dsn:  dsn,
 		mu:   mu,
+		logger: logger,
 	}
 
 	return &db, nil
@@ -82,6 +87,11 @@ func (db *ModerncDatabase) Conn(ctx context.Context) (*sql.DB, error) {
 
 func (db *ModerncDatabase) Close(ctx context.Context) error {
 	return db.conn.Close()
+}
+
+func (db *ModerncDatabase) SetLogger(ctx context.Context, logger *log.Logger) error {
+	db.logger = logger
+	return nil
 }
 
 func (db *ModerncDatabase) DSN(ctx context.Context) string {
