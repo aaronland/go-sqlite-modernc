@@ -1,6 +1,6 @@
 # go-sqlite-modernc
 
-Go package for working with modernc/sqlite SQLite databases.
+Go package for implementing the `aaronland/go-sqlite/v2` interfaces with `modernc/go-sqlite` SQLite databases.
 
 ## Documentation
 
