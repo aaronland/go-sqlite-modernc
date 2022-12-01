@@ -3,7 +3,7 @@ module github.com/aaronland/go-sqlite-modernc
 go 1.18
 
 require (
-	github.com/aaronland/go-sqlite/v2 v2.0.0
+	github.com/aaronland/go-sqlite/v2 v2.1.0
 	modernc.org/sqlite v1.20.0
 )
 
